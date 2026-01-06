@@ -1,0 +1,335 @@
+[
+  {
+    "id": 1766165877541,
+    "name": "Banana Peel",
+    "effect": "Remove hand and keep the money",
+    "target": ["Me"],
+    "timing": ["Not usable if busted", "Before dealer turn", "My turn"],
+    "active": false,
+    "favorite": false
+  },
+  {
+    "id": 1766165995082,
+    "name": "Bee Mushroom",
+    "effect": "Steal a chosen card",
+    "target": ["Other player"],
+    "timing": ["Before dealer turn", "Other player's turn"],
+    "active": false,
+    "favorite": false
+  },
+  {
+    "id": 1766166076380,
+    "name": "Blue Shell",
+    "effect": "Remove a specific card",
+    "target": ["Dealer"],
+    "timing": ["Before turn"],
+    "active": false,
+    "favorite": false
+  },
+  {
+    "id": 1766166155725,
+    "name": "Blue Yoshi Egg",
+    "effect": "Copy the hand",
+    "target": ["Other player"],
+    "timing": ["Before dealer turn", "Other player's turn"],
+    "active": false,
+    "favorite": false
+  },
+  {
+    "id": 1766166376324,
+    "name": "Bob-omb",
+    "effect": "Remove a random card",
+    "target": ["Dealer"],
+    "timing": ["Before turn"],
+    "active": false,
+    "favorite": false
+  },
+  {
+    "id": 1766166537767,
+    "name": "Boo",
+    "effect": "Reveal the card",
+    "target": ["Dealer"],
+    "timing": ["Before dealer turn", "My turn", "Other player's turn"],
+    "active": false,
+    "favorite": false
+  },
+  {
+    "id": 1766166662262,
+    "name": "Boomerang",
+    "effect": "Redraw a specific card",
+    "target": ["Me"],
+    "timing": ["My turn"],
+    "active": true,
+    "favorite": true
+  },
+  {
+    "id": 1766166697831,
+    "name": "Chain Chomp",
+    "effect": "Redraw a specific card",
+    "target": ["Other player"],
+    "timing": ["Before dealer turn", "Other player's turn"],
+    "active": false,
+    "favorite": false
+  },
+  {
+    "id": 1766166799459,
+    "name": "F.L.U.D.D.",
+    "effect": "Remove all cards",
+    "target": ["Me"],
+    "timing": ["My turn"],
+    "active": false,
+    "favorite": false
+  },
+  {
+    "id": 1766166859408,
+    "name": "Fire Flower",
+    "effect": "+1",
+    "target": ["Dealer"],
+    "timing": ["Before turn"],
+    "active": false,
+    "favorite": false
+  },
+  {
+    "id": 1766167026903,
+    "name": "Ghost Mushroom",
+    "effect": "Reveal the next card in the deck",
+    "target": ["Me"],
+    "timing": ["My turn"],
+    "active": true,
+    "favorite": true
+  },
+  {
+    "id": 1766167164300,
+    "name": "Goomba",
+    "effect": "Redraw a random card",
+    "target": ["Me"],
+    "timing": ["Not usable if busted"],
+    "active": true,
+    "favorite": false
+  },
+  {
+    "id": 1766167214854,
+    "name": "Green Shell",
+    "effect": "Remove a random card",
+    "target": ["Me", "Other player"],
+    "timing": ["Before dealer turn"],
+    "active": false,
+    "favorite": false
+  },
+  {
+    "id": 1766167407336,
+    "name": "Green Yoshi Egg",
+    "effect": "Redraw the hand",
+    "target": ["Me"],
+    "timing": ["Before hit"],
+    "active": false,
+    "favorite": false
+  },
+  {
+    "id": 1766167577482,
+    "name": "Hold It",
+    "effect": "Cannot hit; power-up effect",
+    "target": ["All"],
+    "timing": ["Before turn"],
+    "active": false,
+    "favorite": false
+  },
+  {
+    "id": 1766167614954,
+    "name": "Ice Flower",
+    "effect": "-1",
+    "target": ["Dealer"],
+    "timing": ["Before turn"],
+    "active": false,
+    "favorite": false
+  },
+  {
+    "id": 1766167706070,
+    "name": "Libra",
+    "effect": "Remove all cards; both players get the average score",
+    "target": ["Other player"],
+    "timing": ["Before dealer turn"],
+    "active": false,
+    "favorite": false
+  },
+  {
+    "id": 1766167760546,
+    "name": "Maxim Tomato",
+    "effect": "Remove everything; Blackjack",
+    "target": ["Me"],
+    "timing": ["If I have 21"],
+    "active": false,
+    "favorite": false
+  },
+  {
+    "id": 1766167816069,
+    "name": "Metal Mushroom",
+    "effect": "You do not lose if the dealer has 21",
+    "target": ["Me", "Other player"],
+    "timing": ["Before dealer turn"],
+    "active": false,
+    "favorite": false
+  },
+  {
+    "id": 1766173245976,
+    "name": "Moon Mushroom",
+    "effect": "-1",
+    "target": ["Me", "Other player"],
+    "timing": ["My turn", "Before turn", "Before dealer turn", "If busted"],
+    "active": false,
+    "favorite": true
+  },
+  {
+    "id": 1766173417519,
+    "name": "Mushroom",
+    "effect": "+1",
+    "target": ["Me"],
+    "timing": ["My turn"],
+    "active": false,
+    "favorite": true
+  },
+  {
+    "id": 1766174077189,
+    "name": "Objection",
+    "effect": "Instant bust",
+    "target": ["Other player", "Dealer"],
+    "timing": ["Before turn", "My turn", "Other player's turn"],
+    "active": false,
+    "favorite": false
+  },
+  {
+    "id": 1766174140248,
+    "name": "Pink Yoshi Egg",
+    "effect": "Swap hands",
+    "target": ["Other player"],
+    "timing": ["Before dealer turn"],
+    "active": false,
+    "favorite": false
+  },
+  {
+    "id": 1766174260401,
+    "name": "Piranha Plant",
+    "effect": "Redraw a random card",
+    "target": ["Other player"],
+    "timing": ["Before dealer turn"],
+    "active": true,
+    "favorite": false
+  },
+  {
+    "id": 1766174280699,
+    "name": "Poison Mushroom",
+    "effect": "-1",
+    "target": ["Me"],
+    "timing": ["My turn"],
+    "active": true,
+    "favorite": true
+  },
+  {
+    "id": 1766174377789,
+    "name": "Red Shell",
+    "effect": "Remove a chosen card",
+    "target": ["Me", "Other player"],
+    "timing": ["Before dealer turn"],
+    "active": false,
+    "favorite": false
+  },
+  {
+    "id": 1766174569884,
+    "name": "Rock Mushroom",
+    "effect": "Leave the game and keep the money",
+    "target": ["Me"],
+    "timing": ["If busted", "My turn", "Before dealer turn"],
+    "active": false,
+    "favorite": false
+  },
+  {
+    "id": 1766174686700,
+    "name": "Salt",
+    "effect": "Leave the game and keep the money",
+    "target": ["Me", "Other player"],
+    "timing": ["My turn", "Other player's turn"],
+    "active": false,
+    "favorite": false
+  },
+  {
+    "id": 1766174819531,
+    "name": "Star Mushroom",
+    "effect": "+1 or +11",
+    "target": ["Me", "Other player"],
+    "timing": ["My turn", "Other player's turn"],
+    "active": false,
+    "favorite": false
+  },
+  {
+    "id": 1766174971156,
+    "name": "Super Leaf",
+    "effect": "Score becomes 19 and remove all cards",
+    "target": ["Me"],
+    "timing": ["My turn"],
+    "active": false,
+    "favorite": false
+  },
+  {
+    "id": 1766175042825,
+    "name": "The Gentleman",
+    "effect": "Cannot use power-ups; win = x5",
+    "target": ["Me"],
+    "timing": ["Before turn"],
+    "active": false,
+    "favorite": false
+  },
+  {
+    "id": 1766175075971,
+    "name": "White Shell",
+    "effect": "Reveal the next 3 cards of the deck",
+    "target": ["Me"],
+    "timing": ["My turn"],
+    "active": false,
+    "favorite": false
+  },
+  {
+    "id": 1766175158923,
+    "name": "Yellow Shell",
+    "effect": "Copy a chosen card",
+    "target": ["Me", "Other player"],
+    "timing": ["Before dealer turn", "My turn", "Other player's turn"],
+    "active": false,
+    "favorite": false
+  },
+  {
+    "id": 1766175269744,
+    "name": "Yellow Yoshi Egg",
+    "effect": "Redraw the hand",
+    "target": ["Dealer"],
+    "timing": ["Before turn"],
+    "active": false,
+    "favorite": false
+  },
+  {
+    "id": 1766179213335,
+    "name": "Dandelion",
+    "effect": "Instant hit and end turn; 3:1 payout on win",
+    "target": ["Me"],
+    "timing": ["My turn", "Before hit"],
+    "active": false,
+    "favorite": false
+  },
+  {
+    "id": 1766179959403,
+    "name": "Double Cherry",
+    "effect": "Adds 2:1 payout for both players if win",
+    "target": ["Me"],
+    "timing": ["Before turn"],
+    "active": false,
+    "favorite": false
+  },
+  {
+    "id": 1766184141900,
+    "name": "Mega Mushroom",
+    "effect": "Instantly get 21 and end turn",
+    "target": ["Me"],
+    "timing": ["My turn"],
+    "active": true,
+    "favorite": true
+  }
+]

@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Powerups Blackjack</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script>
+      const translations = {
+        fr: {
+          searchPlaceholder: "Rechercher un powerup...",
+          targets: "Cibles:",
+          moments: "Moments:",
+          addPowerup: "Ajouter Powerup",
+          activateAll: "Activer tout",
+          deactivateAll: "Desactiver tout",
+          saveJson: "Save JSON",
+          importJson: "Importer JSON",
+          deleteAll: "Tout supprimer",
+          editPowerup: "Modifier Powerup",
+          powerupName: "Nom du powerup",
+          effect: "Effet",
+          newPowerup: "Nouveau Powerup",
+          add: "Ajouter",
+          cancel: "Annuler",
+          save: "Enregistrer",
+          noPowerupFound: "Aucun powerup trouve. Ajoute-en un!",
+          active: "Actif",
+          inactive: "Inactif",
+          favorite: "Favori",
+          edit: "Modifier",
+          delete: "X",
+          favorites: "⭐ Favoris",
+          noFavorites: "Aucun favori",
+          displayedCount: "powerup(s) affiche(s) sur",
+          total: "total",
+          deleteConfirm: "Supprimer ce powerup ?",
+          importConfirm: "Importer",
+          importReplace: "powerups ? Cela remplacera les donnees actuelles.",
+          importError: "Erreur lors de l importation du fichier",
+          deleteAllWarning: "ATTENTION : Supprimer TOUS les powerups ? Cette action est irreversible !",
+          deleteAllConfirm: "Es-tu vraiment sur ? Tous tes powerups seront perdus !",
+          language: "Langue",
+          targetMe: "Moi",
+          targetOtherPlayer: "Autre joueur",
+          targetDealer: "Dealer",
+          whenToUse: "Quand utiliser:",
+          clearAll: "Tout réinitialiser",
+          possessed: "Possédé",
+          notPossessed: "Non possédé",
+          possessAll: "Tout posséder",
+          possessNone: "Posséder aucun",
+          timingMyTurn: "A mon tour",
+          timingBeforeTurn: "Avant le tour",
+          timingBeforeDealerTurn: "Avant tour du dealer",
+          timingDuringDealerTurn: "Pendant tour dealer",
+          timingBeforeHit: "Avant de hit",
+          timingOtherPlayerTurn: "Tour autre joueur",
+          timingIfI21: "Si j ai 21",
+          timingIfBusted: "Si busted",
+          timingUnusableIfBusted: "Inutilisable si busted",
+        },
+        en: {
+          searchPlaceholder: "Search for a powerup...",
+          targets: "Targets:",
+          moments: "Moments:",
+          addPowerup: "Add Powerup",
+          activateAll: "Activate all",
+          deactivateAll: "Deactivate all",
+          saveJson: "Save JSON",
+          importJson: "Import JSON",
+          deleteAll: "Delete all",
+          editPowerup: "Edit Powerup",
+          powerupName: "Powerup name",
+          effect: "Effect",
+          newPowerup: "New Powerup",
+          add: "Add",
+          cancel: "Cancel",
+          save: "Save",
+          noPowerupFound: "No powerup found. Add one!",
+          active: "Active",
+          inactive: "Inactive",
+          favorite: "Favorite",
+          edit: "Edit",
+          delete: "X",
+          favorites: "⭐ Favorites",
+          noFavorites: "No favorites",
+          displayedCount: "powerup(s) displayed out of",
+          total: "total",
+          deleteConfirm: "Delete this powerup?",
+          importConfirm: "Import",
+          importReplace: "powerups? This will replace current data.",
+          importError: "Error importing file",
+          deleteAllWarning: "WARNING: Delete ALL powerups? This action is irreversible!",
+          deleteAllConfirm: "Are you sure? All your powerups will be lost!",
+          language: "Language",
+          targetMe: "Me",
+          targetOtherPlayer: "Other player",
+          targetDealer: "Dealer",
+          whenToUse: "When to use:",
+          clearAll: "Reset all",
+          possessed: "Possessed",
+          notPossessed: "Not possessed",
+          possessAll: "Possess all",
+          possessNone: "Possess none",
+          timingMyTurn: "My turn",
+          timingBeforeTurn: "Before turn",
+          timingBeforeDealerTurn: "Before dealer turn",
+          timingDuringDealerTurn: "During dealer turn",
+          timingBeforeHit: "Before hit",
+          timingOtherPlayerTurn: "Other player turn",
+          timingIfI21: "If I have 21",
+          timingIfBusted: "If busted",
+          timingUnusableIfBusted: "Unusable if busted",
+        },
+        de: {
+          searchPlaceholder: "Nach einem Powerup suchen...",
+          targets: "Ziele:",
+          moments: "Momente:",
+          addPowerup: "Powerup hinzufügen",
+          activateAll: "Alles aktivieren",
+          deactivateAll: "Alles deaktivieren",
+          saveJson: "JSON speichern",
+          importJson: "JSON importieren",
+          deleteAll: "Alles löschen",
+          editPowerup: "Powerup bearbeiten",
+          powerupName: "Name des Powerup",
+          effect: "Effekt",
+          newPowerup: "Neues Powerup",
+          add: "Hinzufügen",
+          cancel: "Abbrechen",
+          save: "Speichern",
+          noPowerupFound: "Kein Powerup gefunden. Füge eines hinzu!",
+          active: "Aktiv",
+          inactive: "Inaktiv",
+          favorite: "Favorit",
+          edit: "Bearbeiten",
+          delete: "X",
+          favorites: "⭐ Favoriten",
+          noFavorites: "Keine Favoriten",
+          displayedCount: "Powerup(s) angezeigt von",
+          total: "Gesamt",
+          deleteConfirm: "Dieses Powerup löschen?",
+          importConfirm: "Importieren",
+          importReplace: "Powerups? Dies ersetzt die aktuellen Daten.",
+          importError: "Fehler beim Importieren der Datei",
+          deleteAllWarning: "WARNUNG: ALLE Powerups löschen? Diese Aktion ist nicht rückgängig zu machen!",
+          deleteAllConfirm: "Bist du sicher? Alle deine Powerups gehen verloren!",
+          language: "Sprache",
+          targetMe: "Ich",
+          targetOtherPlayer: "Anderer Spieler",
+          targetDealer: "Dealer",
+          whenToUse: "Wann nutzen:",
+          clearAll: "Alle zurücksetzen",
+          possessed: "Besessen",
+          notPossessed: "Nicht besessen",
+          possessAll: "Alle besitzen",
+          possessNone: "Keine besitzen",
+          timingMyTurn: "Mein Zug",
+          timingBeforeTurn: "Vor dem Zug",
+          timingBeforeDealerTurn: "Vor dem Dealer-Zug",
+          timingDuringDealerTurn: "Während Dealer-Zug",
+          timingBeforeHit: "Vor dem Ziehen",
+          timingOtherPlayerTurn: "Zug des anderen Spielers",
+          timingIfI21: "Wenn ich 21 habe",
+          timingIfBusted: "Wenn überzogen",
+          timingUnusableIfBusted: "Nicht nutzbar wenn überzogen",
+        },
+      };
+
+      function getTranslation(languageCode, key) {
+        return (translations[languageCode] || translations.en)[key] || key;
+      }
+    </script>
+
+    <script type="text/babel">
+      const { useState, useMemo, useEffect } = React;
+
+      const PowerupManager = () => {
+        const [powerups, setPowerups] = useState(() => {
+          const saved = localStorage.getItem("blackjackPowerups");
+          return saved
+            ? JSON.parse(saved)
+            : [
+                {
+                  id: 1,
+                  name: "Example - Double Down",
+                  effect: "Double the bet and draw a card",
+                  target: "Me",
+                  timing: "Before hit",
+                  active: true,
+                  favorite: false,
+                },
+              ];
+        });
+
+        const [searchTerm, setSearchTerm] = useState("");
+        const [filterTargets, setFilterTargets] = useState([
+          "Me",
+          "Other player",
+          "Dealer",
+        ]);
+        const [filterTimings, setFilterTimings] = useState([
+          "My turn",
+          "Before turn",
+          "Before dealer turn",
+          "During dealer turn",
+          "Before hit",
+          "Other player turn",
+          "If I have 21",
+          "If busted",
+          "Unusable if busted",
+        ]);
+        const [showAddForm, setShowAddForm] = useState(false);
+        const [newPowerup, setNewPowerup] = useState({
+          name: "",
+          effect: "",
+          target: ["Me"],
+          timing: ["My turn"],
+        });
+        const [editingId, setEditingId] = useState(null);
+        const [editedPowerup, setEditedPowerup] = useState({
+          name: "",
+          effect: "",
+          target: ["Me"],
+          timing: ["My turn"],
+        });
+        const [language, setLanguage] = useState(() => {
+          return localStorage.getItem("language") || "fr";
+        });
+        const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
+
+        const allTargets = ["Me", "Other player", "Dealer"];
+        const allTimings = [
+          "My turn",
+          "Before turn",
+          "Before dealer turn",
+          "During dealer turn",
+          "Before hit",
+          "Other player turn",
+          "If I have 21",
+          "If busted",
+          "Unusable if busted",
+        ];
+
+        useEffect(() => {
+          localStorage.setItem("blackjackPowerups", JSON.stringify(powerups));
+        }, [powerups]);
+
+        useEffect(() => {
+          localStorage.setItem("language", language);
+        }, [language]);
+
+        const t = (key) => getTranslation(language, key);
+
+        const getTargetLabel = (target) => {
+          const targetMap = {
+            "Me": "targetMe",
+            "Other player": "targetOtherPlayer",
+            "Dealer": "targetDealer",
+          };
+          return t(targetMap[target] || target);
+        };
+
+        const getTimingLabel = (timing) => {
+          const timingMap = {
+            "My turn": "timingMyTurn",
+            "Before turn": "timingBeforeTurn",
+            "Before dealer turn": "timingBeforeDealerTurn",
+            "During dealer turn": "timingDuringDealerTurn",
+            "Before hit": "timingBeforeHit",
+            "Other player turn": "timingOtherPlayerTurn",
+            "If I have 21": "timingIfI21",
+            "If busted": "timingIfBusted",
+            "Unusable if busted": "timingUnusableIfBusted",
+          };
+          return t(timingMap[timing] || timing);
+        };
+
+        const addPowerup = () => {
+          if (
+            newPowerup.name.trim() &&
+            newPowerup.target.length > 0 &&
+            newPowerup.timing.length > 0
+          ) {
+            setPowerups([
+              ...powerups,
+              {
+                ...newPowerup,
+                id: Date.now(),
+                active: true,
+              },
+            ]);
+            setNewPowerup({
+              name: "",
+              effect: "",
+              target: ["Me"],
+              timing: ["My turn"],
+            });
+            setShowAddForm(false);
+          }
+        };
+
+        const deletePowerup = (id) => {
+          if (confirm(t("deleteConfirm"))) {
+            setPowerups(powerups.filter((p) => p.id !== id));
+          }
+        };
+
+        const togglePowerup = (id) => {
+          setPowerups(
+            powerups.map((p) => (p.id === id ? { ...p, active: !p.active } : p))
+          );
+        };
+
+        const toggleFavorite = (id) => {
+          setPowerups(
+            powerups.map((p) =>
+              p.id === id ? { ...p, favorite: !p.favorite } : p
+            )
+          );
+        };
+
+        const toggleAllPowerups = (status) => {
+          setPowerups(powerups.map((p) => ({ ...p, active: status })));
+        };
+
+        const filteredPowerups = useMemo(() => {
+          return powerups.filter((p) => {
+            const matchSearch =
+              (p.name || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
+              (p.effect || "").toLowerCase().includes(searchTerm.toLowerCase());
+            const pTargets = Array.isArray(p.target) ? p.target : [p.target];
+            const matchTarget =
+              filterTargets.length === 0 ||
+              pTargets.some((c) => filterTargets.includes(c));
+            const pTimings = Array.isArray(p.timing) ? p.timing : [p.timing];
+            const matchTiming =
+              filterTimings.length === 0 ||
+              pTimings.some((m) => filterTimings.includes(m));
+            return matchSearch && matchTarget && matchTiming;
+          });
+        }, [powerups, searchTerm, filterTargets, filterTimings]);
+
+        const importFromJSON = (e) => {
+          const file = e.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+              try {
+                const imported = JSON.parse(event.target.result);
+                if (
+                  confirm(
+                    t("importConfirm") +
+                      " " +
+                      imported.length +
+                      " " +
+                      t("importReplace")
+                  )
+                ) {
+                  setPowerups(imported);
+                }
+              } catch (error) {
+                alert(t("importError"));
+              }
+            };
+            reader.readAsText(file);
+          }
+        };
+
+        const exportToJSON = () => {
+          const dataStr = JSON.stringify(powerups, null, 2);
+          const blob = new Blob([dataStr], { type: "application/json" });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "powerups_backup.json";
+          a.click();
+          URL.revokeObjectURL(url);
+        };
+
+        const startEdit = (p) => {
+          setEditingId(p.id);
+          const pTiming = Array.isArray(p.timing) ? p.timing : [p.timing];
+          setEditedPowerup({
+            name: p.name,
+            effect: p.effect,
+            target: Array.isArray(p.target) ? p.target : [p.target],
+            timing: pTiming,
+          });
+        };
+
+        const saveEdit = () => {
+          setPowerups(
+            powerups.map((p) =>
+              p.id === editingId ? { ...p, ...editedPowerup } : p
+            )
+          );
+          setEditingId(null);
+          setEditedPowerup({
+            name: "",
+            effect: "",
+            target: "Me",
+            timing: "My turn",
+          });
+        };
+
+        const cancelEdit = () => {
+          setEditingId(null);
+          setEditedPowerup({
+            name: "",
+            effect: "",
+            target: ["Me"],
+            timing: ["My turn"],
+          });
+        };
+
+        const toggleTargetFilter = (target) => {
+          setFilterTargets((prev) =>
+            prev.includes(target)
+              ? prev.filter((c) => c !== target)
+              : [...prev, target]
+          );
+        };
+
+        const toggleTargetNew = (target) => {
+          setNewPowerup((prev) => ({
+            ...prev,
+            target: prev.target.includes(target)
+              ? prev.target.filter((c) => c !== target)
+              : [...prev.target, target],
+          }));
+        };
+
+        const toggleTargetEdit = (target) => {
+          setEditedPowerup((prev) => ({
+            ...prev,
+            target: prev.target.includes(target)
+              ? prev.target.filter((c) => c !== target)
+              : [...prev.target, target],
+          }));
+        };
+
+        const toggleTimingFilter = (timing) => {
+          setFilterTimings((prev) =>
+            prev.includes(timing)
+              ? prev.filter((m) => m !== timing)
+              : [...prev, timing]
+          );
+        };
+
+        const toggleTimingNew = (timing) => {
+          setNewPowerup((prev) => ({
+            ...prev,
+            timing: prev.timing.includes(timing)
+              ? prev.timing.filter((m) => m !== timing)
+              : [...prev.timing, timing],
+          }));
+        };
+
+        const toggleTimingEdit = (timing) => {
+          setEditedPowerup((prev) => ({
+            ...prev,
+            timing: prev.timing.includes(timing)
+              ? prev.timing.filter((m) => m !== timing)
+              : [...prev.timing, timing],
+          }));
+        };
+
+        const clearAllData = () => {
+          if (confirm(t("deleteAllWarning"))) {
+            if (confirm(t("deleteAllConfirm"))) {
+              setPowerups([]);
+              localStorage.removeItem("blackjackPowerups");
+            }
+          }
+        };
+
+        const favorites = powerups.filter((p) => p.favorite);
+
+        return (
+          <div className="min-h-screen bg-gradient-to-br from-green-900 via-green-800 to-black p-4">
+            <div className="max-w-6xl mx-auto">
+              {favorites.length > 0 && (
+                <div className="bg-black/40 backdrop-blur-sm rounded-xl shadow-xl p-6 mb-6 border border-yellow-500/50">
+                  <h2 className="text-2xl font-bold text-yellow-400 mb-4">
+                    {t("favorites")}
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    {allTargets.map((target) => {
+                      const favoritesByTarget = favorites.filter((p) => {
+                        const pTargets = Array.isArray(p.target)
+                          ? p.target
+                          : [p.target];
+                        return pTargets.includes(target);
+                      });
+                      return (
+                        <div key={target}>
+                          <h3 className="text-lg font-bold text-yellow-300 mb-3 pb-2 border-b border-yellow-500/30">
+                            {getTargetLabel(target)}
+                          </h3>
+                          {favoritesByTarget.length > 0 ? (
+                            <div className="space-y-2">
+                              {favoritesByTarget.map((p) => (
+                                <div
+                                  key={p.id}
+                                  className="bg-black/60 border border-yellow-500/30 rounded-lg p-3"
+                                >
+                                  <p className="text-yellow-400 font-semibold text-sm">
+                                    {p.name}
+                                  </p>
+                                  <p className="text-green-200 text-xs mt-1">
+                                    {p.effect}
+                                  </p>
+                                </div>
+                              ))}
+                            </div>
+                          ) : (
+                            <p className="text-gray-400 text-sm italic">
+                              {t("noFavorites")}
+                            </p>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              <div className="bg-black/40 backdrop-blur-sm rounded-xl shadow-xl p-4 mb-6 border border-green-500/30">
+                <div className="mb-4 flex gap-2 items-end">
+                  <input
+                    type="text"
+                    placeholder={t("searchPlaceholder")}
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="flex-1 px-4 py-2 bg-gray-900/60 border border-green-500/40 rounded-lg text-white placeholder-green-400/60 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  />
+                  <div className="relative">
+                    <button
+                      onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
+                      className="px-4 py-2 bg-yellow-600 hover:bg-yellow-500 text-white rounded-lg transition-all font-bold text-lg"
+                      title="Change language"
+                    >
+                      {language.toUpperCase()}
+                    </button>
+
+                    {isLanguageMenuOpen && (
+                      <div className="absolute top-12 right-0 bg-black/90 border border-yellow-500/50 rounded-lg shadow-xl overflow-hidden z-50">
+                        <button
+                          onClick={() => {
+                            setLanguage("fr");
+                            setIsLanguageMenuOpen(false);
+                          }}
+                          className={`w-full px-6 py-3 flex items-center gap-3 transition-all ${
+                            language === "fr"
+                              ? "bg-yellow-600 text-white"
+                              : "text-white hover:bg-gray-700"
+                          }`}
+                        >
+                          <span className="font-semibold">Français</span>
+                        </button>
+                        <button
+                          onClick={() => {
+                            setLanguage("en");
+                            setIsLanguageMenuOpen(false);
+                          }}
+                          className={`w-full px-6 py-3 flex items-center gap-3 transition-all border-t border-gray-700 ${
+                            language === "en"
+                              ? "bg-yellow-600 text-white"
+                              : "text-white hover:bg-gray-700"
+                          }`}
+                        >
+                          <span className="font-semibold">English</span>
+                        </button>
+                        <button
+                          onClick={() => {
+                            setLanguage("de");
+                            setIsLanguageMenuOpen(false);
+                          }}
+                          className={`w-full px-6 py-3 flex items-center gap-3 transition-all border-t border-gray-700 ${
+                            language === "de"
+                              ? "bg-yellow-600 text-white"
+                              : "text-white hover:bg-gray-700"
+                          }`}
+                        >
+                          <span className="font-semibold">Deutsch</span>
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-4">
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <p className="text-green-400 text-sm font-semibold">
+                        {t("targets")}
+                      </p>
+                      {filterTargets.length < allTargets.length && (
+                        <button
+                          onClick={() => setFilterTargets(allTargets)}
+                          className="text-xs text-green-400 hover:text-green-300 font-semibold"
+                        >
+                          {t("clearAll")}
+                        </button>
+                      )}
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {allTargets.map((c) => (
+                        <button
+                          key={c}
+                          onClick={() => toggleTargetFilter(c)}
+                          className={`px-4 py-2 rounded-full font-semibold text-sm transition-all cursor-pointer ${
+                            filterTargets.includes(c)
+                              ? "bg-green-600 text-white shadow-lg"
+                              : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                          }`}
+                        >
+                          {getTargetLabel(c)}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <p className="text-green-400 text-sm font-semibold">
+                        {t("moments")}
+                      </p>
+                      {filterTimings.length < allTimings.length && (
+                        <button
+                          onClick={() => setFilterTimings(allTimings)}
+                          className="text-xs text-green-400 hover:text-green-300 font-semibold"
+                        >
+                          {t("clearAll")}
+                        </button>
+                      )}
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {allTimings.map((m) => (
+                        <button
+                          key={m}
+                          onClick={() => toggleTimingFilter(m)}
+                          className={`px-4 py-2 rounded-full font-semibold text-sm transition-all cursor-pointer ${
+                            filterTimings.includes(m)
+                              ? "bg-purple-600 text-white shadow-lg"
+                              : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                          }`}
+                        >
+                          {getTimingLabel(m)}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-2 mt-4">
+                  <button
+                    onClick={() => setShowAddForm(!showAddForm)}
+                    className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-yellow-600 to-yellow-500 text-black font-bold rounded-lg hover:from-yellow-500 hover:to-yellow-400 transition-all shadow-lg"
+                  >
+                    {t("addPowerup")}
+                  </button>
+
+                  <button
+                    onClick={() => toggleAllPowerups(true)}
+                    className="px-4 py-2 bg-green-700 text-white font-semibold rounded-lg hover:bg-green-600 transition-all"
+                  >
+                    {t("possessAll")}
+                  </button>
+
+                  <button
+                    onClick={() => toggleAllPowerups(false)}
+                    className="px-4 py-2 bg-orange-700 text-white font-semibold rounded-lg hover:bg-orange-600 transition-all"
+                  >
+                    {t("possessNone")}
+                  </button>
+
+                  <button
+                    onClick={exportToJSON}
+                    className="px-4 py-2 bg-blue-700 text-white font-semibold rounded-lg hover:bg-blue-600 transition-all"
+                  >
+                    {t("saveJson")}
+                  </button>
+
+                  <label className="px-4 py-2 bg-purple-700 text-white font-semibold rounded-lg hover:bg-purple-600 transition-all cursor-pointer">
+                    {t("importJson")}
+                    <input
+                      type="file"
+                      accept=".json"
+                      onChange={importFromJSON}
+                      className="hidden"
+                    />
+                  </label>
+
+                  <button
+                    onClick={clearAllData}
+                    className="px-4 py-2 bg-red-700 text-white font-semibold rounded-lg hover:bg-red-600 transition-all"
+                  >
+                    {t("deleteAll")}
+                  </button>
+                </div>
+              </div>
+
+              {editingId && (
+                <div className="bg-black/40 backdrop-blur-sm rounded-xl shadow-xl p-6 mb-6 border border-blue-500/50">
+                  <h2 className="text-2xl font-bold text-blue-400 mb-4">
+                    {t("editPowerup")}
+                  </h2>
+                  <div className="space-y-4">
+                    <input
+                      type="text"
+                      placeholder={t("powerupName")}
+                      value={editedPowerup.name}
+                      onChange={(e) =>
+                        setEditedPowerup({
+                          ...editedPowerup,
+                          name: e.target.value,
+                        })
+                      }
+                      className="w-full px-4 py-2 bg-gray-900/60 border border-green-500/40 rounded-lg text-white placeholder-green-400/60 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                    />
+
+                    <input
+                      type="text"
+                      placeholder={t("effect")}
+                      value={editedPowerup.effect}
+                      onChange={(e) =>
+                        setEditedPowerup({
+                          ...editedPowerup,
+                          effect: e.target.value,
+                        })
+                      }
+                      className="w-full px-4 py-2 bg-gray-900/60 border border-green-500/40 rounded-lg text-white placeholder-green-400/60 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                    />
+
+                    <div>
+                      <p className="text-blue-400 text-sm font-semibold mb-3">
+                        {t("targets")}
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {allTargets.map((c) => (
+                          <button
+                            key={c}
+                            onClick={() => toggleTargetEdit(c)}
+                            className={`px-4 py-2 rounded-full font-semibold text-sm transition-all cursor-pointer ${
+                              editedPowerup.target.includes(c)
+                                ? "bg-blue-600 text-white shadow-lg"
+                                : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                            }`}
+                          >
+                            {getTargetLabel(c)}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <p className="text-blue-400 text-sm font-semibold mb-3">
+                        {t("moments")}
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {allTimings.map((m) => (
+                          <button
+                            key={m}
+                            onClick={() => toggleTimingEdit(m)}
+                            className={`px-4 py-2 rounded-full font-semibold text-sm transition-all cursor-pointer ${
+                              editedPowerup.timing.includes(m)
+                                ? "bg-purple-600 text-white shadow-lg"
+                                : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                            }`}
+                          >
+                            {getTimingLabel(m)}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-2 mt-4">
+                    <button
+                      onClick={saveEdit}
+                      className="flex-1 px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold rounded-lg hover:from-blue-500 hover:to-blue-400 transition-all"
+                    >
+                      {t("save")}
+                    </button>
+                    <button
+                      onClick={cancelEdit}
+                      className="px-4 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-500 transition-all"
+                    >
+                      {t("cancel")}
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {showAddForm && (
+                <div className="bg-black/40 backdrop-blur-sm rounded-xl shadow-xl p-6 mb-6 border border-yellow-500/50">
+                  <h2 className="text-2xl font-bold text-yellow-400 mb-4">
+                    {t("newPowerup")}
+                  </h2>
+                  <div className="space-y-4">
+                    <input
+                      type="text"
+                      placeholder={t("powerupName")}
+                      value={newPowerup.name}
+                      onChange={(e) =>
+                        setNewPowerup({ ...newPowerup, name: e.target.value })
+                      }
+                      className="w-full px-4 py-2 bg-gray-900/60 border border-green-500/40 rounded-lg text-white placeholder-green-400/60 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                    />
+
+                    <input
+                      type="text"
+                      placeholder={t("effect")}
+                      value={newPowerup.effect}
+                      onChange={(e) =>
+                        setNewPowerup({ ...newPowerup, effect: e.target.value })
+                      }
+                      className="w-full px-4 py-2 bg-gray-900/60 border border-green-500/40 rounded-lg text-white placeholder-green-400/60 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                    />
+
+                    <div>
+                      <p className="text-yellow-400 text-sm font-semibold mb-3">
+                        {t("targets")}
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {allTargets.map((c) => (
+                          <button
+                            key={c}
+                            onClick={() => toggleTargetNew(c)}
+                            className={`px-4 py-2 rounded-full font-semibold text-sm transition-all cursor-pointer ${
+                              newPowerup.target.includes(c)
+                                ? "bg-yellow-600 text-white shadow-lg"
+                                : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                            }`}
+                          >
+                            {getTargetLabel(c)}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <p className="text-yellow-400 text-sm font-semibold mb-3">
+                        {t("moments")}
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {allTimings.map((m) => (
+                          <button
+                            key={m}
+                            onClick={() => toggleTimingNew(m)}
+                            className={`px-4 py-2 rounded-full font-semibold text-sm transition-all cursor-pointer ${
+                              newPowerup.timing.includes(m)
+                                ? "bg-yellow-600 text-white shadow-lg"
+                                : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                            }`}
+                          >
+                            {getTimingLabel(m)}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-2 mt-4">
+                    <button
+                      onClick={addPowerup}
+                      className="flex-1 px-4 py-2 bg-gradient-to-r from-green-600 to-green-500 text-white font-bold rounded-lg hover:from-green-500 hover:to-green-400 transition-all"
+                    >
+                      {t("add")}
+                    </button>
+                    <button
+                      onClick={() => setShowAddForm(false)}
+                      className="px-4 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-500 transition-all"
+                    >
+                      {t("cancel")}
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              <div className="space-y-3">
+                {filteredPowerups.length === 0 ? (
+                  <div className="bg-black/40 backdrop-blur-sm rounded-xl p-8 text-center border border-green-500/30">
+                    <p className="text-green-400 text-lg">
+                      {t("noPowerupFound")}
+                    </p>
+                  </div>
+                ) : (
+                  filteredPowerups.map((powerup) => (
+                    <div
+                      key={powerup.id}
+                      className={`bg-black/40 backdrop-blur-sm rounded-xl p-4 border-2 transition-all ${
+                        powerup.active
+                          ? "border-green-500/50 hover:border-green-400"
+                          : "border-red-500/50 opacity-60"
+                      }`}
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold text-yellow-400 mb-2">
+                            {powerup.name}
+                          </h3>
+                          <p className="text-green-200 mb-3">
+                            {powerup.effect}
+                          </p>
+                          <div className="flex flex-wrap gap-2">
+                            <div className="flex flex-wrap gap-1">
+                              {(Array.isArray(powerup.target)
+                                ? powerup.target
+                                : [powerup.target]
+                              ).map((c) => (
+                                <span
+                                  key={c}
+                                  className="px-3 py-1 bg-blue-600/30 border border-blue-500/50 rounded-full text-blue-300 text-sm font-semibold"
+                                >
+                                  {getTargetLabel(c)}
+                                </span>
+                              ))}
+                            </div>
+                            <div className="flex flex-wrap gap-1">
+                              {(Array.isArray(powerup.timing)
+                                ? powerup.timing
+                                : [powerup.timing]
+                              ).map((m) => (
+                                <span
+                                  key={m}
+                                  className="px-3 py-1 bg-purple-600/30 border border-purple-500/50 rounded-full text-purple-300 text-sm font-semibold"
+                                >
+                                  {getTimingLabel(m)}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => togglePowerup(powerup.id)}
+                            className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                              powerup.active
+                                ? "bg-green-600 hover:bg-green-500 text-white"
+                                : "bg-gray-600 hover:bg-gray-500 text-gray-200"
+                            }`}
+                          >
+                            {powerup.active
+                              ? t("possessed")
+                              : t("notPossessed")}
+                          </button>
+                          <button
+                            onClick={() => toggleFavorite(powerup.id)}
+                            className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                              powerup.favorite
+                                ? "bg-yellow-600 hover:bg-yellow-500 text-white"
+                                : "bg-gray-600 hover:bg-gray-500 text-gray-200"
+                            }`}
+                          >
+                            {powerup.favorite
+                              ? "⭐ " + t("favorite")
+                              : "☆ " + t("favorite")}
+                          </button>
+                          <button
+                            onClick={() => startEdit(powerup)}
+                            className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-bold transition-all"
+                          >
+                            {t("edit")}
+                          </button>
+                          <button
+                            onClick={() => deletePowerup(powerup.id)}
+                            className="p-2 bg-red-600/80 hover:bg-red-500 text-white rounded-lg transition-all"
+                          >
+                            {t("delete")}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+
+              <div className="mt-6 text-center text-green-400 text-sm">
+                {filteredPowerups.length} {t("displayedCount")}{" "}
+                {powerups.length} {t("total")}
+              </div>
+            </div>
+          </div>
+        );
+      };
+
+      ReactDOM.render(
+        <PowerupManager />,
+        document.getElementById("root")
+      );
+    </script>
+  </body>
+</html>
