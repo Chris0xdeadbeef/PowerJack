@@ -15,3 +15,4 @@ The interface is intuitive and easy to use.
 - Import powerups from a JSON file
 
 All data is stored locally in your browser. No account is required.
+### Powerups are not translated as you are free to modify them and create new one.
