@@ -2,6 +2,7 @@
 
 PowerJack is a simple and user-friendly website to help you quickly find and manage your powerups on xyzzy’s server.
 
+Run the powerjack.html file to open the website.
 The interface is intuitive and easy to use.
 
 ## Features
