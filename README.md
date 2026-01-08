@@ -17,3 +17,20 @@ The interface is intuitive and easy to use.
 
 All data is stored locally in your browser. No account is required.
 ### Powerups are not translated as you are free to modify them and create new one.
+
+## Custom Backup for Powerups
+
+If you have a custom backup for powerups, be aware that you should **translate only the fields `name` and `effect`**.
+
+This is an example:
+
+```json
+{
+  "id": 1766165877541,
+  "name": "Peau de Banane",
+  "effect": "Retirer la main et garder l'argent",
+  "target": ["Me"],
+  "timing": ["Not usable if busted", "Before dealer turn", "My turn"],
+  "active": false,
+  "favorite": false
+}
