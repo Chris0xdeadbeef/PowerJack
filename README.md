@@ -1,6 +1,6 @@
-# PowerJack
+# PowerJack 
 
-PowerJack is a simple and user-friendly website to help you quickly find and manage your powerups on xyzzy’s server.
+PowerJack is a simple and user-friendly website to help you quickly find and manage your powerups on xyzzy’s server findable on Tabletop Simulator.
 
 Run the powerjack.html file to open the website.
 The interface is intuitive and easy to use.
