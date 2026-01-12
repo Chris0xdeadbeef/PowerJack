@@ -1,26 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Powerups Blackjack</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="UTF-8" />
-  <title>Powerups Blackjack</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- React UMD -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
 
-  <!-- React UMD -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css" />
 
-  <link rel="stylesheet" href="styles.css" />
-</head>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-9Z5GWXZ49M"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-<body>
-  <div id="root"></div>
+      gtag("config", "G-9Z5GWXZ49M");
+    </script>
+  </head>
 
-  <script src="translations.js"></script>
-  <script src="app.js"></script>
-</body>
+  <body>
+    <div id="root"></div>
 
+    <script src="translations.js"></script>
+    <script src="app.js"></script>
+  </body>
 </html>
